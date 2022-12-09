@@ -62,7 +62,7 @@ public class Main {
                 break;
             case (""):
             default:
-                System.out.println("Not supported operation");
+                System.out.println("Not supported operation1");
         }
     }
 
