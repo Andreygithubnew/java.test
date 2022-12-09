@@ -2,17 +2,23 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        boolean isArabic = true;
         Scanner scanner = new Scanner(System.in);
-        String data = scanner.nextLine();
-        String[] elements = data.split(" ");
-        String oneNumber = elements[0];
+        String input = scanner.nextLine();
+        System.out.println(calc(input));
+    }
+
+    public static String calc(String input) throws Exception {
+        boolean isArabic = true;
+        String[] elements = input.split(" ");
+        if (elements.length != 3){
+            throw new Exception("Неправильный формат ввода");
+        }
 
         int a;
         try {
             a = Integer.parseInt(elements[0]);
         } catch (Exception e) {
-            if (isArabic==true) throw new Exception ("т.к. используются одновременно разные системы счисления");;
+            isArabic = false;
             a = translateFromRomanToArabic(elements[0]);
         }
         if (a > 10) {
@@ -22,7 +28,7 @@ public class Main {
         try {
             b = Integer.parseInt(elements[2]);
         } catch (Exception e) {
-            if (isArabic==true) throw new Exception ("т.к. используются одновременно разные системы счисления");
+            if (isArabic) throw new Exception ("т.к. используются одновременно разные системы счисления");
             b = translateFromRomanToArabic(elements[2]);
         }
         if (b > 10) {
@@ -34,35 +40,30 @@ public class Main {
         switch (action) {
             case ("+"):
                 if (isArabic) {
-                    System.out.println(a + b);
+                    return String.valueOf(a + b);
                 } else {
-                    System.out.println(translateFromArabicToRoman(a + b));
+                    return translateFromArabicToRoman(a + b);
                 }
-                break;
             case ("-"):
                 if (isArabic) {
-                    System.out.println(a - b);
+                    return String.valueOf(a - b);
                 } else {
-                    System.out.println(translateFromArabicToRoman(a - b));
+                    return translateFromArabicToRoman(a - b);
                 }
-                break;
             case ("*"):
                 if (isArabic) {
-                    System.out.println(a * b);
+                    return String.valueOf(a * b);
                 } else {
-                    System.out.println(translateFromArabicToRoman(a * b));
+                    return translateFromArabicToRoman(a * b);
                 }
-                break;
             case ("/"):
                 if (isArabic) {
-                    System.out.println(a / b);
+                    return String.valueOf(a / b);
                 } else {
-                    System.out.println(translateFromArabicToRoman(a / b));
+                    return translateFromArabicToRoman(a / b);
                 }
-                break;
-            case (""):
             default:
-                System.out.println("Not supported operation1");
+                throw new Exception("Операция не поддерживается");
         }
     }
 
